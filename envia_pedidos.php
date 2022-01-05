@@ -17,12 +17,21 @@ $municipio = mysqli_real_escape_string($conexao , $_POST['municipio']);
 $cep = mysqli_real_escape_string($conexao , $_POST['cep']);
 $servico = mysqli_real_escape_string($conexao , $_POST['servico']);
 
+date_default_timezone_set('America/Sao_Paulo');
+$dataHora = date('Y-m-d H:i:s');
+//$query = "SELECT id_usuario, usuario from Usuario_Login where usuario = '{$usuario}' and senha = md5('{$senha}')"; createdAt, updatedAt
 
-//$query = "SELECT id_usuario, usuario from Usuario_Login where usuario = '{$usuario}' and senha = md5('{$senha}')";
+$query = "insert into pedidos(nome_razaosocial, cpf_cnpj, rua, numero, complemento, uf, municipio, cep, servico, createdAt, updatedAt) values( '$nomeRazao' , '$cpfCnpj' , '$rua', '$numero', '$complemento', '$uf' , '$municipio', '$cep', '$servico', '$dataHora', '$dataHora')";
 
-$query = "insert into pedidos(nome_razaosocial, cpf_cnpj, rua, numero, complemento, uf, municipio, cep, servico) values( '$nomeRazao' , '$cpfCnpj' , '$rua', '$numero', '$complemento', '$uf' , '$municipio', '$cep', '$servico' )";
+$enviaPedido = mysqli_query($conexao, $query);
 
-$result = mysqli_query($conexao, $query);
+if($enviaPedido){
+   echo "<script>
+   alert('deu certo')
+   </script>";
+   header('Location: pedidos.php');
+    exit();
+}
 
 /*
 $row = mysqli_num_rows($result);
@@ -37,3 +46,4 @@ if($row == 1){
     exit();
 }
 */
+
