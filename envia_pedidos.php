@@ -29,8 +29,6 @@ if($enviaPedido){
    echo "<script>
    alert('deu certo')
    </script>";
-   header('Location: pedidos.php');
-    exit();
 }
 
 /*
